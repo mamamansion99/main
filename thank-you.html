@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ยืนยันการจอง - Mama Mansion</title>
+
+  <!-- Fonts & styles -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Additional styles for the thank-you page */
+    .thank-you-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      background-color: #f8fafc;
+      text-align: center;
+    }
+    .thank-you-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #0d254c;
+    }
+    .thank-you-section p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #5f6c7b;
+    }
+    #reservation-code {
+      font-weight: 600;
+      color: #0d254c;
+    }
+    .line-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .line-actions img.qr-code {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    @media (min-width: 600px) {
+      .line-actions { flex-direction: row; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <section class="thank-you-section">
+    <h2>ขอบคุณสำหรับการจอง!</h2>
+    <p>รหัสการจองของคุณคือ: <span id="reservation-code">—</span></p>
+    <p>โปรดติดต่อเราทาง LINE เพื่อยืนยันการจองและชำระเงินค่าจอง</p>
+
+    <div class="line-actions">
+      <!-- LINE deep link will be set via JS below -->
+      <a id="line-button"
+         href="https://line.me/R/oaMessage/@mama37/?"
+         class="btn"
+         target="_blank"
+         rel="noopener">แชทกับเราใน LINE</a>
+
+      <!-- QR code placeholder -->
+      <img src="images/QR_CODE.png" alt="QR code for LINE" class="qr-code">
+    </div>
+  </section>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const code = (localStorage.getItem('reservationCode') || '').trim();
+    const codeSpan = document.getElementById('reservation-code');
+    const lineBtn  = document.getElementById('line-button');
+
+    if (code) codeSpan.textContent = code;
+
+    const base = 'https://line.me/R/oaMessage/@mama37/?';
+    const message = code ? code : '';
+
+    lineBtn.href = message ? base + encodeURIComponent(message) : base;
+
+    lineBtn.addEventListener('click', function () {
+      const latest = (localStorage.getItem('reservationCode') || '').trim();
+      if (latest) {
+        const msg = latest; // short form only
+        this.href = base + encodeURIComponent(msg);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

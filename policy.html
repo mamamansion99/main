@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>นโยบายการจอง - Mama Mansion</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .policy-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      background: #f6f8fb;
+    }
+    .policy-card {
+      width: 100%;
+      max-width: 720px;
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 28px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.12);
+    }
+    .policy-card h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #0d254c;
+    }
+    .policy-card p {
+      color: #4a5666;
+      line-height: 1.7;
+    }
+    .policy-list {
+      margin: 1.5rem 0;
+      padding-left: 1.25rem;
+    }
+    .policy-list li {
+      margin-bottom: 0.75rem;
+    }
+    .reservation-code {
+      font-weight: 600;
+      color: #0d254c;
+    }
+    .policy-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .policy-actions label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: #334155;
+    }
+    .policy-actions button {
+      align-self: flex-start;
+    }
+    @media (max-width: 600px) {
+      .policy-card {
+        padding: 1.75rem;
+        border-radius: 20px;
+      }
+      .policy-card h1 {
+        font-size: 1.7rem;
+      }
+      .policy-actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="policy-wrap">
+    <div class="policy-card">
+      <h1>ยืนยันนโยบายและเงื่อนไข</h1>
+      <p>
+        รหัสการจองของคุณคือ <span class="reservation-code" id="policy-reservation-code">—</span>
+        โปรดอ่านข้อมูลต่อไปนี้และยืนยันว่าคุณรับทราบก่อนดำเนินการต่อ
+      </p>
+
+      <ul class="policy-list">
+        <li>กรุณาติดต่อทีมงานผ่าน LINE ภายใน 24 ชั่วโมง เพื่อยืนยันวันย้ายเข้าและชำระค่าจอง</li>
+        <li>การชำระค่าจองไม่สามารถขอคืนได้ หากยกเลิกการจองหรือไม่มาทำสัญญาตามกำหนด</li>
+        <li>กรุณานำบัตรประชาชนตัวจริงมาแสดงในวันที่ทำสัญญา พร้อมชำระเงินประกันตามที่ทีมงานแจ้ง</li>
+        <li>หากต้องการแก้ไขข้อมูลหลังจากส่งฟอร์ม กรุณาแจ้งทีมงานโดยตรงเพื่ออัปเดตรายละเอียด</li>
+      </ul>
+
+      <div class="policy-actions">
+        <label>
+          <input type="checkbox" id="policy-ack-checkbox">
+          <span>ฉันได้อ่านและยอมรับนโยบายการจองข้างต้นเรียบร้อยแล้ว</span>
+        </label>
+        <button class="btn" type="button" id="policy-ack-btn" disabled>ฉันยืนยันและไปต่อ</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const code = (localStorage.getItem('reservationCode') || '').trim();
+    const codeSpan = document.getElementById('policy-reservation-code');
+    const checkbox = document.getElementById('policy-ack-checkbox');
+    const btn = document.getElementById('policy-ack-btn');
+
+    if (code) {
+      codeSpan.textContent = code;
+    } else {
+      codeSpan.textContent = 'ยังไม่มีรหัส (กรุณากลับไปกรอกฟอร์ม)';
+    }
+
+    checkbox.addEventListener('change', () => {
+      btn.disabled = !checkbox.checked;
+    });
+
+    btn.addEventListener('click', () => {
+      if (!checkbox.checked) return;
+      // Safety: double check code exists
+      const latestCode = (localStorage.getItem('reservationCode') || '').trim();
+      if (!latestCode) {
+        alert('ไม่พบรหัสการจอง กรุณากลับไปกรอกฟอร์มอีกครั้ง');
+        window.location.href = 'index.html#reservation';
+        return;
+      }
+      window.location.href = 'thank-you.html';
+    });
+  });
+  </script>
+</body>
+</html>

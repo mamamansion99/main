@@ -1,0 +1,1620 @@
+/*
+  Global styles for the Mama Mansion website.  The palette uses deep
+  blues and teal tones to evoke feelings of serenity and trust—qualities
+  designers associate with blue hues in UI design【740253860175436†L75-L87】【740253860175436†L121-L126】.  A
+  smooth gradient provides depth and guides the eye without being
+  distracting【848041152212851†L58-L74】.
+*/
+
+/* CSS reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Use Kanit for Thai typography throughout the site */
+  font-family: 'Kanit', sans-serif;
+  color: #1a1a1a;
+  background-color: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Navigation bar */
+/* Navbar is now white with a subtle shadow to separate it from the page */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+/* Logo colour becomes dark to contrast against the white bar */
+.logo {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #0d254c;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Navigation links are dark by default and turn blue on hover */
+.nav-links li a {
+  text-decoration: none;
+  color: #0d254c;
+  font-weight: 500;
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.nav-links li a:hover {
+  color: #4f70f0;
+}
+
+/* Prevent the underline animation from appearing on the booking button.
+   The main nav links still use the underline effect, but the button
+   relies on its filled background for emphasis so the underline is
+   removed. */
+.nav-links li a.nav-btn::after,
+.nav-links li a.nav-btn:hover::after {
+  display: none;
+}
+
+/* Keep the nav button text white on hover.  The default hover colour
+   change (to blue) applied to all nav links should not override the
+   button’s white text. */
+.nav-links li a.nav-btn:hover {
+  color: #ffffff;
+}
+
+/* Underline animation for nav links */
+/* Underline appears on hover to subtly emphasise the link */
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #4ea8de 0%, #4f70f0 100%);
+  transition: width 0.3s ease-out;
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+/* Hero section on a white site: simple vertical spacing and a neutral
+   backdrop.  The image and overlay have been removed to allow the
+   content to breathe on a light background. */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full screen height */
+  background-image: url("images/Background_Pre.jpg"); /* Change to your image file */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: white; /* Ensures text is visible */
+}
+
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); /* Adjust for readability */
+}
+
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 80%;
+}
+
+/* Hero heading becomes dark on light background */
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+/* Hero subheading uses a softer grey */
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ffffff;
+}
+
+/* Button style */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #4ea8de 0%, #4f70f0 100%);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+/* Navigation reservation button: mirror the hero button styling but
+   smaller padding so it blends into the navbar. */
+.nav-btn {
+  display: inline-block;
+  /* Increase horizontal padding so the button looks balanced and the text
+     never feels cramped */
+  padding: 0.4rem 1rem !important;
+  border-radius: 20px !important;
+  background: linear-gradient(90deg, #4ea8de 0%, #4f70f0 100%);
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  line-height: 1;              /* ✅ Helps with vertical spacing */
+  vertical-align: middle;      /* ✅ Align vertically with text */
+  margin-top: 2px;             /* ✅ Fine-tune positioning */
+  white-space: nowrap;
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Reservation section styles */
+.reservation-section {
+  background-color: #f8fafc;
+  text-align: center;
+  /* Reserve space above this section when using anchor links.  The
+     scroll-margin-top property prevents the fixed navigation bar from
+     overlapping the heading when the user navigates via the navbar
+     button or hero button. */
+  scroll-margin-top: 100px;
+}
+
+.reservation-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #0d254c;
+}
+
+.reservation-section p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #596b83;
+}
+
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.reservation-form .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e5eaf1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.reservation-form select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%237a8699" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 1rem;
+}
+
+.reservation-form input::placeholder,
+.reservation-form textarea::placeholder {
+  color: #a5b1c2;
+}
+
+/* Use the same styling as .btn for the reservation submit button */
+.reservation-form button.btn {
+  align-self: center;
+  cursor: pointer;
+  padding: 0.7rem 1.5rem;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #4ea8de 0%, #4f70f0 100%);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  transition: transform 0.2s ease;
+  display: inline-block;
+  width: auto;
+}
+
+.reservation-form button.btn:hover {
+  transform: translateY(-3px);
+}
+
+.full-map-wrapper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+
+/* Nearby section cards styles */
+.nearby-section {
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.nearby-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: #0d254c;
+}
+
+.nearby-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.simple-card {
+  background: #f8fafc;
+  border: 1px solid #e5eaf1;
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.simple-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.simple-card .card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.simple-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: #0d254c;
+}
+
+.simple-card p {
+  font-size: 0.95rem;
+  color: #596b83;
+}
+
+/* -------------------------------------------------------------------------
+   Nearby categories styles.  These rules style the new Work/Shopping/Train
+   cards.  A responsive grid lays out up to three cards per row on larger
+   screens and stacks them on smaller devices.  Each category card uses
+   subtle shadows, rounded corners and the palette blues to maintain
+   consistency with the rest of the site.  You can adjust spacing,
+   colours or typography here to refine the look. */
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.category-card {
+  /* Apply a rich blue gradient to match the site theme.  The light
+     and dark tones echo the hero background while remaining distinct
+     from the rest of the page. */
+  background: linear-gradient(180deg, #0c4c91 0%, #2571c7 100%);
+  border: none;
+  border-radius: 24px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Use white text inside the card for high contrast */
+  color: #ffffff;
+  text-align: left;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.category-icon {
+  /* Enlarge the icon and place it inside a subtle circular backdrop */
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-card h3 {
+  /* Big title inside the card header.  Increased font size for emphasis
+     and remove bottom margin so it sits close to the subtitle. */
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Smaller text within a card heading used to display secondary information
+   such as distances.  The colour is slightly lighter than the main
+   heading to create a clear hierarchy. */
+.category-card .small-title {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #d0def0;
+}
+
+/* Within the nearby list, separate the place name and its distance so
+   that the text aligns neatly on both sides of the card.  The place
+   name uses the default card colour, while the distance is slightly
+   brighter to draw the eye to the measurement. */
+.place-name {
+  flex: 1 1 auto;
+}
+.distance {
+  flex: 0 0 auto;
+  color: #ffffff;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-list li {
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  color: #e6ecf5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Subtitle beneath each card’s title (e.g., the category name).  Use a
+   slightly smaller font and a lighter colour for contrast against
+   the background. */
+.category-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Sections */
+.section {
+  padding: 6rem 2rem;
+}
+
+/* About section */
+/* About section background is a lighter gradient to improve
+   contrast against the white text. */
+/* About section: white background */
+.about-section {
+  background-color: #ffffff;
+}
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-text {
+  flex: 1 1 400px;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #0d254c;
+}
+
+/* Copy colour for about text is slightly brighter for readability */
+.about-text p {
+  margin-bottom: 1rem;
+  max-width: 600px;
+  color: #596b83;
+}
+
+.about-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image img {
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Features section */
+/* Features section background: lighter gradient for better contrast */
+/* Features section: soft light grey background */
+.features-section {
+  background-color: #f8fafc;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+}
+
+.features-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Feature cards: light background with a subtle border */
+.feature-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  border: 1px solid #e5eaf1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Subtle hover effect on feature cards */
+.feature-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Icons coloured blue for emphasis */
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #4f70f0;
+}
+
+/* Feature headings dark to contrast against white cards */
+.feature-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+  font-weight: 600;
+  color: #0d254c;
+}
+
+/* Descriptive text in feature cards is brighter */
+/* Feature descriptions use a medium grey */
+.feature-item p {
+  font-size: 0.95rem;
+  color: #596b83;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Gallery section */
+/* Gallery section background: slightly brighter gradient */
+/* Gallery section uses a white background */
+.gallery-section {
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.gallery-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+}
+
+.gallery-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Gallery items: light card with gentle shadow */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.07);
+}
+
+/* Contact section */
+/* Contact section: lighten gradient for form readability */
+/* Contact section: alternating light grey background */
+.contact-section {
+  background-color: #f8fafc;
+  text-align: center;
+}
+
+/* Contact headings dark */
+.contact-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #0d254c;
+}
+
+/* Contact description grey */
+.contact-section p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #596b83;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Form fields: light background with dark text */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e5eaf1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+/* Placeholder text: light grey */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #a5b1c2;
+}
+
+/* Align submit button */
+.contact-form button {
+  align-self: center;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Footer text colour is muted grey */
+.footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #7a8699;
+}
+
+/* Scroll animation classes */
+.animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.3rem;
+  }
+  .features-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  /* On small screens place the image gallery above the text */
+  .about-images {
+    order: -1;
+    margin-bottom: 1rem;
+  }
+  .nav-links {
+    display: none; /* hide nav links on small screens; could add a mobile menu */
+  }
+}
+
+/* ------------------------------------------------------------------
+   Custom styles for extended sections
+   These rules support the additional sections added to the page,
+   including the about image gallery, tabbed amenities, room types,
+   360° views and location map placeholder.  They adhere to the
+   existing colour palette and typography defined above.  */
+
+/* About images grid */
+.about-images {
+  flex: 1 1 300px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.about-images img {
+  width: calc(33.333% - 0.66rem);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabbed amenities */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 30px;
+  background-color: #e5eaf1;
+  color: #0d254c;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: linear-gradient(90deg, #4ea8de 0%, #4f70f0 100%);
+  color: #ffffff;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Fade‑in animation for tab content transitions */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.tab-content.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Spinner used inside the submit button to indicate loading */
+.spinner {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Facilities grid reused from original features grid but with tighter width */
+.facilities-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.facility-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e5eaf1;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.facility-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.facility-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.7rem;
+  color: #4f70f0;
+}
+
+.facility-item h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #0d254c;
+}
+
+.facility-item p {
+  font-size: 0.9rem;
+  color: #596b83;
+}
+
+/* Plan details and image */
+.plan-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.plan-details {
+  flex: 1 1 300px;
+}
+
+.plan-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #0d254c;
+}
+
+.plan-details ul {
+  list-style: none;
+}
+
+.plan-details li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #596b83;
+}
+
+.plan-details li strong {
+  color: #0d254c;
+}
+
+.plan-image {
+  flex: 1 1 300px;
+}
+
+.plan-image img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Room types */
+.room-types-section {
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.room-types-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: #0d254c;
+}
+
+.room-types-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.room-type-item {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e5eaf1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.room-type-image img {
+  width: 100%;
+  border-radius: 12px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
+}
+
+.room-type-text h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #0d254c;
+}
+
+.room-type-text p {
+  font-size: 1rem;
+  color: #596b83;
+}
+
+/* 360° view */
+.view360-section {
+  background-color: #f8fafc;
+  text-align: center;
+}
+
+.view360-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #0d254c;
+}
+
+.view360-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.view360-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.view360-image {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.view360-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.view360-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+}
+
+.view360-item p {
+  margin-top: 0.7rem;
+  font-size: 0.95rem;
+  color: #596b83;
+}
+
+/* Location */
+.location-section {
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.location-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #0d254c;
+}
+
+.location-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.location-content p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #596b83;
+}
+
+.location-map {
+  display: flex;
+  justify-content: center;
+}
+
+.map-placeholder {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  background-color: #e5eaf1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7a8699;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  /* Ensure about gallery wraps nicely on small screens */
+  .about-images img {
+    width: 100%;
+  }
+}
+
+/* Nearby Places Section */
+.nearby-section {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.nearby-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.nearby-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.nearby-card {
+    background: white;
+    padding: 20px;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.nearby-card:hover {
+    transform: translateY(-5px);
+}
+
+.nearby-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #444;
+}
+
+.nearby-card p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* ------------------------------------------------------------------ */
+/* Map action bar styles                                              */
+/* The blue bar below the location map holds three links.  Each link */
+/* is spaced evenly and lifts slightly on hover to provide a pleasant */
+/* interactive experience without overwhelming the page.             */
+.map-tab {
+  background-color: #0c4c91;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 0;
+  font-size: 1rem;
+  font-family: sans-serif;
+}
+
+.map-tab .map-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.map-tab .map-link:hover {
+  transform: translateY(-4px);
+  color: #d0e6ff;
+}
+
+/* Hide the mobile CTA on desktop */
+.nav-cta-mobile { 
+  display: none; 
+}
+
+/* Show it on mobile (reusing .nav-btn’s blue pill styles) */
+@media (max-width: 768px) {
+  .nav-cta-mobile {
+    display: inline-block;
+    /* optional tiny tweak so it sits nicely in the bar */
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+}
+
+/* ===== Floor Plan Styles ===== */
+.floorplan-wrapper {
+  max-width: 980px;
+  margin: 1rem auto 2rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.95));
+  border: 1px solid rgba(64,122,227,.15);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 10px 24px rgba(17,42,114,.08);
+}
+
+.floorplan-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.floorplan-controls {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid rgba(64,122,227,.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.segmented button {
+  border: none;
+  background: transparent;
+  padding: .35rem .7rem;
+  font-weight: 600;
+  color: #2b4162;
+  cursor: pointer;
+}
+.segmented button.active {
+  background: #e6f0ff;
+  color: #0a3ea1;
+}
+
+/* Grid: 8 cols × 2 rows */
+.floorplan-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(2, 72px);
+  gap: 8px;
+  padding: 8px;
+}
+
+/* Room cell look */
+.room-cell {
+  position: relative;
+  border-radius: 12px;
+  border: 1px solid rgba(15,43,88,.12);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: .12s;
+  user-select: none;
+  cursor: pointer;
+}
+.room-cell .id { font-weight: 700; color: #0d254c; }
+.room-cell .meta { font-size: .8rem; color: #5c6f87; }
+
+.room-cell.avail:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(13,51,138,.10);
+  border-color: rgba(64,122,227,.35);
+}
+.room-cell.hold { background: #fff8e1; }
+.room-cell.reserved { background: #ffe4e4; }
+.room-cell.selected { outline: 2px solid #1f6feb; box-shadow: 0 0 0 4px rgba(31,111,235,.15); }
+
+.floorplan-selection {
+  margin-top: .6rem;
+  font-size: .95rem;
+  color: #2b4162;
+  text-align: center;
+}
+
+/* === Tighten spacing under the room grid & reservation section === */
+.reservation-section.section {
+  /* reduce the huge bottom padding for this section only */
+  padding-bottom: 3rem;
+}
+
+.floorplan-wrapper {
+  /* was: margin: 1rem auto 2rem; */
+  margin: 1rem auto 0.75rem;
+}
+
+.floorplan-grid {
+  /* remove extra inner space that created a visual “tail” */
+  padding-bottom: 0;
+}
+
+.floorplan-selection {
+  /* make the “ยังไม่ได้เลือกห้อง” line compact */
+  margin: 0.5rem 0 1rem;
+}
+
+/* fixtures (e.g., stairs) */
+.room-cell.fixture {
+  background: #eef3fb;
+  border-style: dashed;
+  cursor: not-allowed; /* unclickable vibe */
+}
+.room-cell.fixture .stair-text {
+  color: #365079;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ===== Extra small devices (phones ≤520px) ===== */
+@media (max-width: 520px) {
+  .floorplan-wrapper {
+    padding: 0.5rem;
+    border-radius: 12px;
+    max-width: 100%;        /* let it shrink to screen */
+    overflow-x: auto;       /* allow horizontal scroll if still tight */
+  }
+
+  .floorplan-grid {
+    grid-template-columns: repeat(8, 1fr);  /* still 8 columns */
+    grid-template-rows: repeat(2, minmax(40px, 1fr)); 
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .room-cell {
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+  .room-cell .id { font-size: 0.85rem; }
+  .room-cell .meta { font-size: 0.7rem; }
+}
+
+/* Floor-plan viewer */
+#floorplan-view { text-align:center; }
+
+.fpv-controls {
+  display:flex; flex-wrap:wrap; gap:10px;
+  align-items:center; justify-content:center; margin-bottom:12px;
+}
+
+.segmented {
+  background:#f3f5fb; border:1px solid #e6e9f3; padding:4px; border-radius:12px;
+  display:inline-flex; gap:4px;
+}
+.segmented button{
+  padding:.45rem .8rem; border-radius:9px; border:0; background:transparent;
+  cursor:pointer; font-weight:600;
+}
+.segmented button.active{ background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+
+.fpv-download{
+  padding:.45rem .8rem; border:1px solid #e6e9f3; border-radius:9px; text-decoration:none;
+  background:#fff;
+}
+
+.fpv-frame{
+  width:min(100%, 980px); margin-inline:auto;
+  border:1px solid #eef0f5; border-radius:14px; overflow:hidden;
+  background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+.fpv-frame img{ width:100%; height:auto; display:block; }
+
+.fpv-caption{ margin-top:10px; color:#667085; }
+
+/* Site Overview (Big Image) */
+.site-overview-section {
+  background-color: #ffffff;      /* พื้นขาว สะอาด */
+  text-align: center;
+}
+
+.site-figure {
+  width: min(1000px, 92vw);
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #eef0f5;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  padding: 16px;
+}
+
+.site-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.site-caption {
+  margin-top: 10px;
+  color: #667085;
+  font-size: 0.95rem;
+}
+
+.parking-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.parking-option:hover {
+  background: #eef2ff;
+  border-color: #6366f1;
+}
+
+.parking-option input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #94a3b8;
+  border-radius: 6px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.parking-option input[type="checkbox"]:checked {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.parking-option.plan-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.parking-plans {
+  margin-top: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #f8fafc;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-6px);
+  transition: max-height 0.28s ease, opacity 0.24s ease, transform 0.24s ease, padding 0.24s ease;
+  pointer-events: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.parking-plans.open {
+  opacity: 1;
+  max-height: 600px;
+  padding: 16px;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.parking-plans-title {
+  margin: 0 0 4px;
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.95rem;
+}
+
+.parking-plan-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.parking-plan-option input[type="radio"] {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-top: 8px;
+  accent-color: #2563eb;
+}
+
+.parking-plan-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  width: 100%;
+  color: #1f2937;
+  box-sizing: border-box;
+}
+
+.parking-plan-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 10px 22px -18px rgba(37, 99, 235, 0.65);
+}
+
+.parking-plan-card .plan-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+.parking-plan-card .plan-price {
+  font-size: 0.95rem;
+  color: #2563eb;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.parking-plan-card .plan-note {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.3;
+  display: block;
+}
+
+.parking-plan-option.selected .parking-plan-card {
+  border-color: #2563eb;
+  box-shadow: 0 12px 28px -20px rgba(37, 99, 235, 0.75);
+  transform: translateY(-1px);
+}
+
+.parking-plan-card .plan-availability {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2563eb;
+  display: block;
+  margin-top: 4px;
+}
+
+.parking-plan-option.plan-disabled .parking-plan-card {
+  background: #f1f5f9;
+  border-color: rgba(148, 163, 184, 0.3);
+  box-shadow: none;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.parking-plan-option.plan-disabled .plan-note,
+.parking-plan-option.plan-disabled .plan-availability {
+  color: #b91c1c;
+}
+
+@media (max-width: 600px) {
+  .parking-plans {
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  .parking-plan-option {
+    align-items: center;
+  }
+
+  .parking-plan-option input[type="radio"] {
+    margin-top: 0;
+  }
+}
+
+/* ---------- Prebook Section ---------- */
+.prebook-section {
+  padding: 32px 0;
+}
+.prebook-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.prebook-card {
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 18px;
+  background: rgba(59, 130, 246, 0.05);
+  transition: background 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+}
+.prebook-card[open] {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(37, 99, 235, 0.28);
+}
+.prebook-summary {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 54px 18px 22px;
+  cursor: pointer;
+  position: relative;
+}
+.prebook-summary::-webkit-details-marker {
+  display: none;
+}
+.prebook-summary::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #2563eb;
+  border-bottom: 2px solid #2563eb;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.prebook-card[open] .prebook-summary::after {
+  transform: translateY(-50%) rotate(-135deg);
+}
+.prebook-summary-heading {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0d254c;
+}
+.prebook-summary-desc {
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+.prebook-panel {
+  display: grid;
+  gap: 14px;
+  padding: 0 22px 22px;
+  border-top: 1px solid rgba(37, 99, 235, 0.18);
+}
+.prebook-note {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(37, 99, 235, 0.1);
+  color: #1d4ed8;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.prebook-panel p:not(.prebook-note) {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+.prebook-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid #2563eb;
+  background: rgba(37, 99, 235, 0.08);
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.08s ease;
+}
+.prebook-btn:hover {
+  background: rgba(37, 99, 235, 0.15);
+  transform: translateY(-1px);
+}
+.prebook-btn:active {
+  transform: translateY(0);
+}
+@media (max-width: 600px) {
+  .prebook-summary {
+    padding-right: 48px;
+  }
+  .prebook-summary-heading {
+    font-size: 1.15rem;
+  }
+  .prebook-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mama Mansion - มามา แมนชั่น ฉลองกรุง 37</title>
+  <!--
+    The stylesheet contains all of the visual styles for this page.  A blue
+    palette with subtle gradients reflects the calm and trustworthy nature
+    associated with luxury living and follows guidance that calm and muted
+    tones create trust and professionalism【740253860175436†L75-L87】.  The
+    typography uses system fonts for crisp rendering and a modern feel.  Feel
+    free to adjust the colours in styles.css if you’d like a different shade
+    of blue.
+  -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Import Kanit font for Thai typography -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation bar pinned to the top.  Uses a semi‑transparent backdrop
+       and blurs to feel light like Apple’s site. -->
+<nav class="navbar">
+  <!-- Logo only on desktop -->
+  <a href="#" class="logo desktop-only">Mama Mansion</a>
+
+  <!-- Reservation button only on mobile -->
+  <a href="#reservation" class="nav-btn nav-cta-mobile">จองเลย</a>
+
+
+
+  <!-- Desktop navigation menu -->
+  <ul class="nav-links">
+    <li><a href="#about">เกี่ยวกับเรา</a></li>
+    <li><a href="#features">สิ่งอำนวยความสะดวก</a></li>
+    <li><a href="#gallery">แกลเลอรี่</a></li>
+    <li><a href="#reservation" class="nav-btn">จองเลย</a></li>
+  </ul>
+</nav>
+
+
+  <!-- Hero section with an abstract blue gradient background.  The
+       background image is generated via imagegen and stored locally in
+       the images folder.  A gradient overlay ensures good contrast for
+       text. -->
+  <header class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content animate visible">
+      <h1>Mama&nbsp;Mansion</h1>
+      <p>สัมผัสการอยู่อาศัยที่ใส่ใจ...ในทุกวันที่คุณพักผ่อน</p>
+      <a href="#reservation" class="btn">จองเลย</a>
+    </div>
+  </header>
+
+  <!-- เกี่ยวกับเรา section provides a brief description of the apartment.
+       The two‑column layout collapses on smaller screens.  In response to
+       feedback, the decorative graphic has been replaced with a small
+       gallery of three images to better showcase the residence.  Feel free
+       to replace the placeholders with your own photographs later on. -->
+  <section id="about" class="about-section section">
+    <div class="container about-container">
+      <div class="about-text">
+        <h2>เกี่ยวกับเรา</h2>
+        <p>
+          มามา แมนชั่น ตั้งอยู่ในซอยฉลองกรุง 37 เป็นหอพักที่ออกแบบมาเพื่อตอบโจทย์การใช้ชีวิตของผู้ที่ทำงานในเขตนิคมอุตสาหกรรมลาดกระบัง รวมถึงนักศึกษาจากสถาบันเทคโนโลยีพระจอมเกล้าฯ ลาดกระบัง (KMITL)
+          เรามีที่จอดรถยนต์และรถจักรยานยนต์ พร้อมสิ่งอำนวยความสะดวกครบครัน อาทิ อินเทอร์เน็ตความเร็วสูง (Wi-Fi), เครื่องซักผ้าหยอดเหรียญ, ตู้กดน้ำ และระบบรักษาความปลอดภัย
+        </p>
+        <p>
+          สิ่งที่เราให้ความสำคัญที่สุดคือการมอบประสบการณ์การอยู่อาศัยที่ดีที่สุด เราพิถีพิถันในทุกรายละเอียด เพื่อให้คุณรู้สึกอบอุ่น ปลอดภัย และสะดวกสบายดั่งบ้าน
+        </p>
+      </div>
+      <!-- Replace the single decorative graphic with a trio of images to give
+           visitors a better feel for the interiors. Each image uses the same
+           placeholder but can be swapped out for real photos when available. -->
+      <div class="about-images">
+        <img src="images/logo.png" alt="Apartment view one" loading="lazy">
+        <img src="images/Nikom.jpg" alt="Apartment view two" loading="lazy">
+        <img src="images/KMITL.png" alt="Apartment view three" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- สิ่งอำนวยความสะดวก / project plan section.  This replaces the original
+       static amenities grid with a tabbed interface.  Visitors can
+       switch between a list of facilities and a summary of the
+       development’s key facts.  Feel free to rename the tabs or adjust
+       the content to better match your property’s offering. -->
+  <section id="features" class="features-section section">
+    <h2 class="animate">สิ่งอำนวยความสะดวก &amp; Plans</h2>
+    <!-- Tab buttons: the first is active by default -->
+    <div class="tabs-container animate">
+      <button class="tab-btn active" data-target="facilities-content">Facilities</button>
+      <button class="tab-btn" data-target="plan-content">แปลนโครงการ</button>
+    </div>
+   <!-- Facilities panel -->
+  <div class="tab-content active" id="facilities-content">
+    <div class="facilities-grid animate">
+      <!-- รายการสิ่งอำนวยความสะดวก -->
+      <div class="facility-item">
+        <div class="facility-icon" aria-hidden="true">❄️</div>
+        <h3>แอร์</h3>
+        <p>ติดตั้งเครื่องปรับอากาศทุกห้อง เย็นสบายตลอดปี</p>
+      </div>
+      <div class="facility-item">
+        <div class="facility-icon" aria-hidden="true">🚿</div>
+        <h3>เครื่องทำน้ำอุ่น</h3>
+        <p>ระบบน้ำอุ่นอัตโนมัติให้ความสะดวกสบายทุกห้องน้ำ</p>
+      </div>
+      <div class="facility-item">
+        <div class="facility-icon" aria-hidden="true">🛏️</div>
+        <h3>เฟอร์นิเจอร์</h3>
+        <p>มีเตียง ตู้เสื้อผ้า โต๊ะ พร้อมเข้าอยู่</p>
+      </div>
+      <div class="facility-item">
+        <div class="facility-icon" aria-hidden="true">💳</div>
+        <h3>มีระบบรักษาความปลอดภัย</h3>
+        <p>เข้าออกด้วยระบบคีย์การ์ด (Keycard)</p>
+      </div>
+      <div class="facility-item">
+        <div class="facility-icon" aria-hidden="true">📶</div>
+        <h3>Wi‑Fi</h3>
+        <p>อินเทอร์เน็ตไร้สายความเร็วสูงทั่วทั้งอาคาร</p>
+      </div>
+    <div class="facility-item">
+      <div class="facility-icon" aria-hidden="true">🏍️</div>
+      <h3>ที่จอดมอเตอร์ไซค์</h3>
+      <p>มีพื้นที่จอดรถจักรยานยนต์ภายในอาคาร</p>
+    </div>
+      <div class="facility-item">
+        <div class="facility-icon" aria-hidden="true">🚗</div>
+        <h3>ที่จอดรถ</h3>
+        <p>มีที่จอดรถภายในพื้นที่อาคารสำหรับผู้พักอาศัยและผู้มาติดต่อ</p>
+      </div>
+    <div class="facility-item">
+      <div class="facility-icon" aria-hidden="true">🧺</div>
+      <h3>เครื่องซักผ้า</h3>
+      <p>มีเครื่องซักผ้าและอบให้บริการ</p>
+    </div>
+      <div class="facility-item">
+        <div class="facility-icon" aria-hidden="true">🎥</div>
+        <h3>กล้องวงจรปิด</h3>
+        <p>กล้องวงจรปิด 24 ชม. ครอบคลุมทั่วพื้นที่กว่า 40 จุด</p>
+      </div>
+    <div class="facility-item">
+      <div class="facility-icon" aria-hidden="true">🚰</div>
+      <h3>ตู้น้ำดื่มหยอดเหรียญ</h3>
+      <p>มีตู้น้ำดื่มสะอาดพร้อมให้บริการแบบหยอดเหรียญ</p>
+    </div>
+    </div>
+  </div>
+
+    <!-- Project plan panel -->
+    <div class="tab-content" id="plan-content">
+      <div class="plan-container animate">
+        <div class="plan-details">
+          <h3>Project Facts</h3>
+          <ul>
+            <li><strong>พื้นที่โครงการ:</strong> 2 ไร่ (approx.)</li>
+            <li><strong>จำนวนอาคาร:</strong> 2</li>
+            <li><strong>จำนวนชั้น:</strong> 5</li>
+            <li><strong>จำนวนยูนิต:</strong> 120</li>
+            <li><strong>ที่จอดรถ:</strong> ประมาณ 50</li>
+          </ul>
+        </div>
+        <div class="plan-image">
+          <!-- Placeholder plan illustration; replace with a site plan or
+               architectural rendering when ready. -->
+          <img src="images/Square.png" alt="Project plan placeholder" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room types section.  Introduces two representative layouts with
+       descriptions.  Images are placeholders and can be replaced with
+       actual room photography later on. -->
+  <section id="room-types" class="room-types-section section">
+    <h2 class="animate">Room Types</h2>
+    <div class="room-types-grid animate">
+      <div class="room-type-item">
+        <div class="room-type-image">
+          <img src="images/Room_A.jpg" alt="Studio / Type A" loading="lazy">
+        </div>
+        <div class="room-type-text">
+          <h3>ห้องมาตรฐาน</h3>
+          <p>ประมาณ 22 &nbsp;m² • พื้นที่ใช้สอยลงตัว • เหมาะสำหรับการพักอาศัยที่เรียบง่ายและคุ้มค่า พร้อมห้องน้ำในตัว</p>
+        </div>
+      </div>
+      <div class="room-type-item">
+        <div class="room-type-image">
+          <img src="images/Room_B.png" alt="One Bedroom / Type B" loading="lazy">
+        </div>
+        <div class="room-type-text">
+          <h3>ห้องหัวมุม</h3>
+          <p>ประมาณ 23 &nbsp;m² • พื้นที่กว้างกว่าเล็กน้อย • มีหน้าต่างบานใหญ่เพิ่มแสงธรรมชาติและการระบายอากาศ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 360° room view section.  Presents immersive glimpses into the
+       different room types.  The overlay label hints at interactivity
+       (even though these are currently static images). -->
+  <section id="view360" class="view360-section section">
+    <h2 class="animate">360° Room Views</h2>
+    <div class="view360-grid animate">
+      <div class="view360-item">
+        <div class="view360-image">
+            <iframe
+            src="https://tour.panoee.net/68a354395351dace2a62daa1"
+            frameborder="0" allowfullscreen loading="laz0y"
+            allow="vr; xr; accelerometer; gyroscope; autoplay;"
+            style="width:100%;height:400px;border:0"></iframe>
+
+          <div class="view360-overlay">360°</div>
+        </div>
+        <p>ห้องมาตรฐาน : 22&nbsp;m²</p>
+      </div>
+      <div class="view360-item">
+        <div class="view360-image">
+        <iframe id="tour-embeded" name="RoomB" src="https://tour.panoee.net/iframe/68a40a25c767450927497e34" frameBorder="0" width="100%" height="400px" scrolling="no" allowvr="yes" allow="vr; xr; accelerometer; gyroscope; autoplay;" allowFullScreen="false" webkitallowfullscreen="false" mozallowfullscreen="false" loading="eager"></iframe>
+              <script>
+                var pano_iframe_name = "tour-embeded";
+                window.addEventListener("devicemotion", function(e){ var iframe = document.getElementById(pano_iframe_name); if (iframe) iframe.contentWindow.postMessage({ type:"devicemotion", deviceMotionEvent:{ acceleration:{ x:e.acceleration.x, y:e.acceleration.y, z:e.acceleration.z }, accelerationIncludingGravity:{ x:e.accelerationIncludingGravity.x, y:e.accelerationIncludingGravity.y, z:e.accelerationIncludingGravity.z }, rotationRate:{ alpha:e.rotationRate.alpha, beta:e.rotationRate.beta, gamma:e.rotationRate.gamma }, interval:e.interval, timeStamp:e.timeStamp } }, "*"); });
+              </script>
+          <div class="view360-overlay">360°</div>
+        </div>
+        <p>ห้องหัวมุม : 23&nbsp;m²</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location section.  Provides a brief description of where the
+       residence is situated and includes a placeholder for a map or
+       illustrative graphic.  Replace the map placeholder with an
+       embedded map or site plan when available. -->
+  <section id="location" class="location-section section" style="padding-bottom: 0;">
+    <h2 class="animate">ทำเลที่ตั้ง</h2>
+    <div class="location-content animate">
+      <p>สะดวกทั้งในการทำงานและการพักผ่อน รายล้อมด้วยห้างสรรพสินค้าและตลาด ใกล้เขตนิคมอุตสาหกรรมลาดกระบัง อีกทั้งยังเหมาะสำหรับนักศึกษาจากสถาบันเทคโนโลยีพระจอมเกล้าฯ (KMITL)</p>
+  <div class="full-map-wrapper">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3258.754438118508!2d100.79420448295565!3d13.75872294613084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d67182ebcda1f%3A0xb8dc99d1afe893bf!2zTWFtYSBNYW5zaW9uIOKAkyDguKHguLLguKHguLIg4LmB4Lih4LiZ4LiK4Lix4LmI4LiZIOC4ieC4peC4reC4h-C4geC4o-C4uOC4hyAzNw!5e0!3m2!1sen!2sth!4v1754311146189!5m2!1sen!2sth"
+      width="100%" height="450"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+    </div>
+  </section>
+
+  <!-- Blue action bar below the map.  The inline styles have been replaced with a
+       dedicated class so that hover animations can be defined in CSS. -->
+  <div class="map-tab animate">
+    <a href="https://www.google.com/maps/place/Mama+Mansion+%E2%80%93+%E0%B8%A1%E0%B8%B2%E0%B8%A1%E0%B8%B2+%E0%B9%81%E0%B8%A1%E0%B8%99%E0%B8%8A%E0%B8%B1%E0%B9%88%E0%B8%99+%E0%B8%89%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87+37/@13.7587229,100.7942045,17.25z/data=!4m6!3m5!1s0x311d67182ebcda1f:0xb8dc99d1afe893bf!8m2!3d13.7590151!4d100.7947514!16s%2Fg%2F11ygb3r2fd?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/marker.png" alt="Google marker icon" />
+      แผนที่ Google
+    </a>
+    <a href="images/Artboard 1@4x.png" target="_blank" class="map-link">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/download.png" alt="Download icon" />
+      ดาวน์โหลดแผนที่
+    </a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Mama+Mansion+Chalongkrung+37" target="_blank" class="map-link">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/waypoint-map.png" alt="Directions icon" />
+      ขอเส้นทาง
+    </a>
+  </div>
+
+
+  <!-- แกลเลอรี่ section uses multiple decorative tiles to evoke variety.
+       If you wish to replace these with real photography later, simply
+       swap the image sources. -->
+  
+<section id="nearby-places" class="nearby-section section">
+    <!-- Section heading adjusted to reflect the new nearby categories.  Feel free to update the text here. -->
+    <h2 class="animate">ใกล้อะไรบ้าง?</h2>
+    <!-- Rather than listing individual places, organise nearby points of interest into three categories.  Each card contains an icon and a list of three placeholder entries.  You can edit the category names and list items inside these <li> elements to suit your property’s location. -->
+    <!-- Display customised nearby cards below. -->
+    <div class="categories-container animate">
+      <!-- Work category -->
+      <div class="category-card">
+        <div class="category-header">
+          <!-- Factory / work icon drawn inline as a simple building outline -->
+          <span class="category-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="9" width="18" height="12" rx="2" ry="2" />
+              <path d="M7 9V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4" />
+              <line x1="12" y1="13" x2="12" y2="13" />
+              <line x1="9" y1="13" x2="9" y2="13" />
+              <line x1="15" y1="13" x2="15" y2="13" />
+            </svg>
+          </span>
+          <div class="title-group">
+            <h3>นิคมอุตสาหกรรม 750&nbsp;เมตร</h3>
+          </div>
+        </div>
+        <ul class="category-list">
+          <li><span class="place-name">สุวรรณภูมิ</span><span class="distance">12&nbsp;กม</span></li>
+          <li><span class="place-name">KMITL</span><span class="distance">4.1&nbsp;กม</span></li>
+        </ul>
+      </div>
+      <!-- Shopping category -->
+      <div class="category-card">
+        <div class="category-header">
+          <!-- Shopping bag icon -->
+          <span class="category-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 7l1 14h10l1-14z" />
+              <path d="M9 7a3 3 0 0 1 6 0" />
+            </svg>
+          </span>
+          <div class="title-group">
+            <h3>7‑11 หน้าปากซอย</h3>
+          </div>
+        </div>
+        <ul class="category-list">
+          <li><span class="place-name">ห้าง V&nbsp;Market</span><span class="distance">200&nbsp;เมตร</span></li>
+          <li><span class="place-name">ห้าง iPLACE&nbsp;PARK</span><span class="distance">400&nbsp;เมตร</span></li>
+          <li><span class="place-name">ตลาดลาว</span><span class="distance">150&nbsp;เมตร</span></li>
+        </ul>
+      </div>
+      <!-- Train category -->
+      <div class="category-card">
+        <div class="category-header">
+          <!-- Train icon -->
+          <span class="category-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="15" rx="3" ry="3" />
+              <circle cx="8" cy="18" r="2" />
+              <circle cx="16" cy="18" r="2" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </span>
+          <div class="title-group">
+            <h3>เดินทางสะดวกสบาย</h3>
+          </div>
+        </div>
+        <ul class="category-list">
+          <li><span class="place-name">สนามบินสุวรรณภูมิ</span><span class="distance">12&nbsp;กม</span></li>
+          <li><span class="place-name">ARL&nbsp;ลาดกระบัง</span><span class="distance">8.2&nbsp;กม</span></li>
+        </ul>
+      </div>
+    </div>
+</section>
+
+<section id="gallery" class="gallery-section section">
+    <h2 class="animate">แกลเลอรี่</h2>
+    <div class="gallery-grid animate">
+      <!-- Nine placeholder images arranged in a 3×3 grid.  Replace the
+           source of each <img> with your own photos to customise the
+           gallery.  Alt attributes describe the image for accessibility. -->
+      <div class="gallery-item"><img src="images/1.jpg" alt="แกลเลอรี่ item one" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/2.jpg" alt="แกลเลอรี่ item two" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/3.jpg" alt="แกลเลอรี่ item three" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/4.png" alt="แกลเลอรี่ item four" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/5.png" alt="แกลเลอรี่ item five" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/6.png" alt="แกลเลอรี่ item six" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/7.png" alt="แกลเลอรี่ item seven" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/8.png" alt="แกลเลอรี่ item eight" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/9.png" alt="แกลเลอรี่ item nine" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Floor Plan (View Only) -->
+<section id="floorplan-view" class="section">
+  <h2 class="animate">แปลนห้องพัก</h2>
+
+  <div class="fpv-controls animate">
+      <div class="segmented fpv-buildings" aria-label="เลือกอาคาร">
+        <button type="button" class="active" data-b="A">ตึก A</button>
+        <button type="button" data-b="B">ตึก B</button>
+      </div>
+
+      <div class="segmented fpv-floors" aria-label="เลือกชั้น">
+        <button type="button" class="active" data-floor="1">ชั้น 1</button>
+        <button type="button" data-floor="2">ชั้น 2</button>
+        <button type="button" data-floor="3">ชั้น 3</button>
+        <button type="button" data-floor="4">ชั้น 4</button>
+        <button type="button" data-floor="5">ชั้น 5</button>
+      </div>
+
+      <a id="fpv-download" class="fpv-download" href="#" download>ดาวน์โหลดแปลน</a>
+    </div>
+
+    <div class="fpv-frame animate">
+      <img id="fpv-image" src="" alt="แปลนห้องพัก" loading="lazy">
+    </div>
+</section>
+
+<!-- Site Overview (Big Image Only) -->
+<section id="site-overview" class="site-overview-section section">
+  <h2 class="animate">ผังภาพรวมโครงการ</h2>
+  <div class="site-figure animate">
+    <img src="images/Bird_View.webp" alt="ผังภาพรวม: ตึก A, ตึก B และถนนทางเข้า">
+    <p class="site-caption">มามา แมนชั่น — มุมมองจากถนนฉลองกรุง 37 (ตัวอย่างภาพรวมโครงการ)</p>
+  </div>
+</section>
+
+
+
+  <!-- แบบฟอร์มจองห้องพักภาษาไทย -->
+  <section id="reservation" class="reservation-section section">
+    <h2 class="animate">จองห้องพัก</h2>
+    <p class="animate">กรุณากรอกข้อมูลเพื่อทำการจองห้องพักกับ Mama Mansion เราจะติดต่อกลับโดยเร็วที่สุด</p>
+    <!-- Remove the inline submit handler.  A unique code will be generated and the form data sent to Google Sheets via JavaScript. -->
+    <form id="reservation-form" class="reservation-form animate">
+      <!-- First row: full name and telephone -->
+      <input type="hidden" name="room_id" id="room_id">
+      <div class="form-row">
+        <input type="text" name="fullname" placeholder="ชื่อ-นามสกุล" required>
+        <input type="tel" name="phone" placeholder="เบอร์โทรศัพท์" required>
+      </div>
+      <!-- Second row: Line ID and room type selection -->
+      <div class="form-row">
+        <input type="text" name="line_id" placeholder="ไลน์ไอดี" required>
+
+      </div>
+      <!-- Third row: check‑in date only -->
+      <textarea name="notes" placeholder="หมายเหตุเพิ่มเติม (ไม่บังคับ)" rows="4"></textarea>
+
+    <label class="parking-option">
+      <input type="checkbox" name="parking" value="yes" id="parking-checkbox">
+      ต้องการที่จอดรถยนต์
+    </label>
+    <div class="parking-plans" id="parking-plans" aria-hidden="true">
+      <p class="parking-plans-title">เลือกแพ็กเกจที่จอด</p>
+      <div class="parking-plan-option">
+        <input type="radio" id="parking-plan-roofed" name="parking_plan" value="roofed">
+        <label for="parking-plan-roofed" class="parking-plan-card">
+          <span class="plan-title">มีหลังคา</span>
+          <span class="plan-price">800 บาท / เดือน</span>
+          <span class="plan-note">จอดใต้หลังคา ลดความร้อนและฝน</span>
+          <span class="plan-availability" id="parking-roofed-availability">กำลังโหลด...</span>
+        </label>
+      </div>
+      <div class="parking-plan-option">
+        <input type="radio" id="parking-plan-open" name="parking_plan" value="open">
+        <label for="parking-plan-open" class="parking-plan-card">
+          <span class="plan-title">กลางแจ้ง</span>
+          <span class="plan-price">500 บาท / เดือน</span>
+          <span class="plan-note">พื้นที่กลางแจ้ง งบประหยัด</span>
+          <span class="plan-availability" id="parking-open-availability">กำลังโหลด...</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ===== Floor Plan Panel (single instance) ===== -->
+<div class="floorplan-wrapper" id="floorplan">
+  <div class="floorplan-header">
+    <h3>เลือกห้องจากผัง</h3>
+    <div class="floorplan-controls">
+      <!-- Building tabs -->
+      <div class="segmented" id="building-tabs">
+        <button type="button" class="active" data-b="A">ตึก A</button>
+        <button type="button" data-b="B">ตึก B</button>
+      </div>
+      <!-- Floor tabs -->
+      <div class="segmented" id="floor-tabs">
+        <button type="button" class="active" data-floor="1">ชั้น 1</button>
+        <button type="button" data-floor="2">ชั้น 2</button>
+        <button type="button" data-floor="3">ชั้น 3</button>
+        <button type="button" data-floor="4">ชั้น 4</button>
+        <button type="button" data-floor="5">ชั้น 5</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid container (always 16 cells: 8 cols × 2 rows) -->
+  <div class="floorplan-grid" id="floor-grid" aria-live="polite"></div>
+</div>
+
+<!-- Keep exactly one selection line + one hidden input -->
+<p class="floorplan-selection" id="floor-selection">ยังไม่ได้เลือกห้อง</p>
+<input type="hidden" name="room_id" id="room_id">
+
+      <!-- Use the same button style as the hero for consistency -->
+      <button type="submit" class="btn">ส่งคำขอจอง</button>
+    </form>
+
+    <section id="prebook" class="prebook-section">
+      <div class="prebook-container">
+        <details class="prebook-card">
+          <summary class="prebook-summary">
+            <span class="prebook-summary-heading">ห้องเต็มแล้วใช่ไหม?</span>
+            <span class="prebook-summary-desc">คลิกเพื่อฝากข้อมูลไว้ให้ทีมงานติดต่อกลับ</span>
+          </summary>
+          <div class="prebook-panel">
+            <p class="prebook-note"><strong>ใช้เฉพาะกรณีห้องเต็ม</strong> เพื่อที่เราจะได้แจ้งทันทีเมื่อมีห้องว่างกลับมา</p>
+            <p>ถ้ายังมีห้องว่างอยู่ ให้ใช้ปุ่ม “ส่งคำขอจอง” ด้านบนเพื่อจองได้ทันทีค่ะ</p>
+            <a href="prebook.html" class="prebook-btn">ฝากข้อมูลให้ติดต่อกลับ</a>
+          </div>
+        </details>
+      </div>
+    </section>
+
+
+
+
+  </section>
+
+    <footer class="footer">© 2025 Mama Mansion. สงวนลิขสิทธิ์</footer>
+
+  <!-- Scripts: handles scroll animations using IntersectionObserver. -->
+  <script src="script.js"></script>
+</body>
+</html>

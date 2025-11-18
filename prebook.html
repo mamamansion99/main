@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>จองห้องล่วงหน้า</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Page spacing */
+    .reservation-section{ padding-top:40px; padding-bottom:60px; }
+
+    /* ---------- Pretty checkbox ---------- */
+    .nice-check{ display:flex; align-items:center; gap:12px; margin:6px 0 18px; user-select:none; }
+    .nice-check input[type="checkbox"]{
+      appearance:none; -webkit-appearance:none;
+      inline-size:22px; block-size:22px; border-radius:8px;
+      border:2px solid #dbe1ea; background:#fff; display:grid; place-items:center;
+      outline:none; cursor:pointer; transition:border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+    }
+    .nice-check input[type="checkbox"]:hover{ border-color:#b6c2d4; }
+    .nice-check input[type="checkbox"]:checked{
+      background:linear-gradient(135deg,#60a5fa,#3b82f6); border-color:transparent; box-shadow:0 8px 20px rgba(59,130,246,.35);
+    }
+    .nice-check input[type="checkbox"]::after{ content:""; inline-size:10px; block-size:10px; border-radius:3px; transform:scale(0); background:#fff; transition:transform .15s ease; }
+    .nice-check input[type="checkbox"]:checked::after{ transform:scale(1); }
+    .nice-check label{ font-weight:700; cursor:pointer; }
+
+    /* Month field */
+    .field-row{ display:grid; grid-template-columns:1fr; gap:12px; margin:8px 0 6px; }
+    .field-label{ font-weight:700; margin:10px 0 2px; }
+    .reservation-form input[type="month"]{
+      width:100%; padding:14px 16px; border-radius:12px; border:1px solid #e5e7eb; background:#fff;
+      font-size:16px; outline:none; transition:box-shadow .15s ease, border-color .15s ease;
+    }
+    .reservation-form input[type="month"]:focus{ border-color:#93c5fd; box-shadow:0 0 0 4px rgba(147,197,253,.35); }
+    .muted{ color:#6b7280; font-size:.95rem; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">Mama Mansion</div>
+      <nav><a class="nav-btn" href="index.html#reservation">กลับไปจองปกติ</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="reservation-section" id="prebook-section">
+      <div class="container">
+        <h2 class="section-title">จองห้องพัก (ล่วงหน้า)</h2>
+        <p class="section-subtitle">
+          กรุณากรอกข้อมูลเพื่อทำการ <strong>จองล่วงหน้า</strong> กับ Mama Mansion ทีมงานจะติดต่อกลับโดยเร็วที่สุด
+        </p>
+
+        <form id="prebook-form" class="reservation-form">
+          <input type="text" name="fullname" placeholder="ชื่อ–นามสกุล" autocomplete="name" required />
+          <input type="tel"  name="phone"    placeholder="เบอร์โทรศัพท์" autocomplete="tel" required />
+          <input type="text" name="line_id"  placeholder="ไลน์ไอดี" autocomplete="off" required />
+          <textarea name="notes" rows="4" placeholder="หมายเหตุเพิ่มเติม (ไม่บังคับ)"></textarea>
+
+          <!-- ต้องการที่จอดรถ (สไตล์เดียวกับหน้าเดิม) -->
+          <div class="nice-check">
+            <input id="prebook-parking" type="checkbox" name="parking" value="yes" />
+            <label for="prebook-parking">ต้องการที่จอดรถยนต์</label>
+          </div>
+
+          <!-- เดือนที่ต้องการเข้าอยู่ -->
+          <div class="field-row">
+            <label for="move_in_month" class="field-label">ต้องการเข้าอยู่ช่วงเดือน</label>
+            <input type="month" id="move_in_month" name="move_in_month" />
+            <div class="muted">เลือกเป็นเดือน (เช่น 2025-05) หากมีวันที่เจาะจงให้พิมพ์เพิ่มใน “หมายเหตุ”</div>
+          </div>
+
+          <button type="submit" class="btn">ส่งคำขอจอง</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ===== ใส่ URL ของ Apps Script (Web App) ที่ใช้งานจริง =====
+    // ถ้ามีตัวแปร GAS_BASE ใน script.js อยู่แล้ว จะใช้ค่านั้นโดยอัตโนมัติ
+    const GAS_URL = (typeof GAS_BASE !== 'undefined' && GAS_BASE) ? GAS_BASE : 'https://script.google.com/macros/s/AKfycbxlOAf_BFxuiI0pLtY_BGq0UEaTqMGEdzF9-0hNl7263ExAbk9-mrn3Kzc54YzFyXKgEw/exec';
+
+    (function(){
+      const form = document.getElementById('prebook-form');
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const original  = submitBtn ? submitBtn.innerHTML : '';
+
+        // เก็บค่า
+        const fullname = form.fullname.value.trim();
+        const phone    = form.phone.value.trim();
+        const line_id  = form.line_id.value.trim();
+        const notes    = form.notes.value.trim();
+        const parking  = form.parking.checked ? 'yes' : '';
+        const move_in_month = form.move_in_month.value; // YYYY-MM
+
+        // สร้าง query สำหรับ action=prebook (ไปลงชีต PreBook)
+        const qs = new URLSearchParams({
+          action: 'prebook',
+          fullname,
+          phone,
+          line_id,
+          notes,
+          parking,
+          move_in_month
+        });
+
+        if (submitBtn){ submitBtn.disabled = true; submitBtn.innerHTML = '<span class="spinner"></span> กำลังส่ง...'; }
+
+        try {
+          const res  = await fetch(`${GAS_URL}?${qs.toString()}`, { cache: 'no-store' });
+          const text = (await res.text()).trim();
+
+          // คาดหวังโค้ดรูปแบบ #PBxxx
+          if (!/^#?PB\d{3,}$/i.test(text)) {
+            alert('ไม่สามารถส่งคำขอได้ กรุณาลองใหม่หรือติดต่อแอดมิน');
+            if (submitBtn){ submitBtn.disabled = false; submitBtn.innerHTML = original || 'ส่งคำขอจอง'; }
+            return;
+          }
+
+          // ไปหน้า thank-you (โหมด prebook)
+          const code = text.startsWith('#') ? text : ('#' + text);
+          window.location.href = `thank-you.html?mode=prebook&code=${encodeURIComponent(code)}`;
+        } catch (err) {
+          console.error(err);
+          alert('ขออภัย ระบบขัดข้อง กรุณาลองใหม่อีกครั้ง');
+          if (submitBtn){ submitBtn.disabled = false; submitBtn.innerHTML = original || 'ส่งคำขอจอง'; }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
