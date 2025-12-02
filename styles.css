@@ -1198,6 +1198,36 @@ body {
 }
 .room-cell .id { font-weight: 700; color: #0d254c; }
 .room-cell .meta { font-size: .8rem; color: #5c6f87; }
+.room-cell.furnished {
+  background: linear-gradient(180deg, #f5f8ff 0%, #fff);
+  border-color: #d6e4ff;
+}
+.room-cell.unfurnished {
+  background: linear-gradient(180deg, #fff7fb 0%, #fff);
+  border-color: #f6c1ea;
+}
+.room-cell.unfurnished .id { color: #b0147b; }
+.furnish-badge {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  right: 8px;
+  height: 18px;
+  padding: 0 10px;
+  background: linear-gradient(90deg, #f95fc4, #ff79d3);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(249,95,196,.35);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none; /* purely informational */
+}
 
 .room-cell.avail:hover {
   transform: translateY(-2px);

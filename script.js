@@ -28,6 +28,12 @@ function getRoomStatus(roomId) {
 /** Treat these tokens as fixtures (unclickable) */
 const FIXTURES = new Set(['บันได', 'STAIR', 'LOBBY', 'OFFICE', '-']);
 
+/** ห้องที่ไม่มีเฟอร์นิเจอร์ (ตามแปลนสีชมพู) */
+const UNFURNISHED = new Set([
+  'B402','B403','B404','B405','B410','B411','B412','B413','B414',
+  ,'B502','B514', 'B503'
+]); 
+
 /** Grid layouts (8 cols × 2 rows per floor “strip” for simplicity) */
 const LAYOUTS = {
   A: {
@@ -74,6 +80,8 @@ function renderGrid(building = currentBuilding, floor = currentFloor) {
 
   layout.forEach((token) => {
     const div = document.createElement('div');
+    const isUnfurnished = UNFURNISHED.has(token);
+    const furnishClass = isUnfurnished ? 'unfurnished' : 'furnished';
 
     // Fixtures
     if (FIXTURES.has(token) || !token) {
@@ -85,9 +93,12 @@ function renderGrid(building = currentBuilding, floor = currentFloor) {
 
     // Normal rooms
     const status = getRoomStatus(token); // live status
-    div.className = `room-cell ${status} ${selectedRoom === token ? 'selected' : ''}`;
+    div.className = `room-cell ${status} ${furnishClass} ${selectedRoom === token ? 'selected' : ''}`;
     div.dataset.room = token;
-    div.innerHTML = `<div class="id">${token}</div>`;
+    div.innerHTML = `
+      <div class="id">${token}</div>
+      ${isUnfurnished ? '<span class="furnish-badge" aria-label="ไม่มีเฟอร์นิเจอร์">ไม่มีเฟอร์ฯ</span>' : ''}
+    `;
 
     if (status === 'avail') {
       const handleSelect = () => {
@@ -100,7 +111,7 @@ function renderGrid(building = currentBuilding, floor = currentFloor) {
         hiddenRoomInputs.forEach(inp => { inp.value = token; });
 
         // label
-        if (selLabel) selLabel.textContent = `เลือกห้อง: ${token}`;
+        if (selLabel) selLabel.textContent = `เลือกห้อง: ${token}${isUnfurnished ? ' · ไม่มีเฟอร์นิเจอร์' : ''}`;
 
         // enable submit
         if (submitBtn) submitBtn.disabled = false;
@@ -111,7 +122,7 @@ function renderGrid(building = currentBuilding, floor = currentFloor) {
       });
       div.tabIndex = 0;
       div.setAttribute('role', 'button');
-      div.setAttribute('aria-label', `ห้อง ${token}`);
+      div.setAttribute('aria-label', `ห้อง ${token}${isUnfurnished ? ' ไม่มีเฟอร์นิเจอร์' : ''}`);
     } else {
       div.style.cursor = 'not-allowed';
       div.setAttribute('aria-disabled', 'true');
