@@ -251,8 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const parkingPlanRadios = parkingPlans ? Array.from(parkingPlans.querySelectorAll('input[name="parking_plan"]')) : [];
   const parkingPlanOptions = parkingPlans ? Array.from(parkingPlans.querySelectorAll('.parking-plan-option')) : [];
   const planAvailabilityEls = {
-    roofed: document.getElementById('parking-roofed-availability'),
-    open: document.getElementById('parking-open-availability')
+    standard: document.getElementById('parking-standard-availability')
   };
   const parkingCheckboxWrapper = parkingCheckbox ? parkingCheckbox.closest('.parking-option') : null;
   const numberFormatter = new Intl.NumberFormat('th-TH');
@@ -283,6 +282,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const handleParkingToggle = () => {
     if (!parkingPlans) return;
     if (parkingCheckbox && parkingCheckbox.checked) {
+      const firstAvailable = parkingPlanRadios.find(r => !r.disabled);
+      if (firstAvailable && !firstAvailable.checked) {
+        firstAvailable.checked = true;
+        refreshParkingCards();
+      }
       openParkingPlans();
     } else {
       closeParkingPlans();
@@ -313,28 +317,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const deriveStandardAvailability = (parking = {}) => {
+    const standard = parking.standard || {};
+    const standardCap = Number(standard.capacity ?? 0);
+    const standardUsed = Number(standard.used ?? 0);
+    const standardLeft = Number(standard.left ?? standard.remaining ?? (standardCap - standardUsed));
+    if (standardCap || standardUsed || Number.isFinite(standardLeft)) {
+      return {
+        capacity: standardCap,
+        used: standardUsed,
+        left: standardLeft
+      };
+    }
+
+    // Fallback: sum roofed + open if backend still returns old shape
+    const roofed = parking.roofed || {};
+    const open = parking.open || {};
+    const cap = Number(roofed.capacity ?? 0) + Number(open.capacity ?? 0);
+    const used = Number(roofed.used ?? 0) + Number(open.used ?? 0);
+    const left = Number(roofed.left ?? roofed.remaining ?? (Number(roofed.capacity ?? 0) - Number(roofed.used ?? 0))) +
+                 Number(open.left ?? open.remaining ?? (Number(open.capacity ?? 0) - Number(open.used ?? 0)));
+    return { capacity: cap, used, left };
+  };
+
   const updateParkingAvailabilityUI = (parking) => {
     if (!parking) return;
 
-    ['roofed', 'open'].forEach(plan => {
-      const data = parking[plan] || {};
-      const capacity = Number(data.capacity ?? 0);
-      const used = Number(data.used ?? 0);
-      const left = Number(data.left ?? data.remaining ?? (capacity - used));
+    const standard = deriveStandardAvailability(parking);
+    const capacity = Number(standard.capacity ?? 0);
+    const left = Number(standard.left ?? 0);
 
-      if (planAvailabilityEls[plan]) {
-        planAvailabilityEls[plan].textContent = left <= 0
-          ? `เต็มแล้ว (ทั้งหมด ${formatNumber(capacity)} คัน)`
-          : `เหลือ ${formatNumber(left)} จาก ${formatNumber(capacity)} คัน`;
-      }
+    if (planAvailabilityEls.standard) {
+      planAvailabilityEls.standard.textContent = left <= 0
+        ? `เต็มแล้ว (ทั้งหมด ${formatNumber(capacity)} คัน)`
+        : `เหลือ ${formatNumber(left)} จาก ${formatNumber(capacity)} คัน`;
+    }
 
-      setPlanDisabledState(plan, left <= 0);
-    });
+    setPlanDisabledState('standard', left <= 0);
 
     if (parkingCheckbox) {
-      const roofedLeft = Number(parking.roofed?.left ?? parking.roofed?.remaining ?? 0);
-      const openLeft = Number(parking.open?.left ?? parking.open?.remaining ?? 0);
-      const anyAvailable = roofedLeft > 0 || openLeft > 0;
+      const anyAvailable = left > 0;
       parkingCheckbox.disabled = !anyAvailable;
       if (parkingCheckboxWrapper) parkingCheckboxWrapper.classList.toggle('plan-disabled', !anyAvailable);
       if (!anyAvailable) {
