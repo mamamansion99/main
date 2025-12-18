@@ -31,7 +31,7 @@ const FIXTURES = new Set(['บันได', 'STAIR', 'LOBBY', 'OFFICE', '-']);
 /** ห้องที่ไม่มีเฟอร์นิเจอร์ (ตามแปลนสีชมพู) */
 const UNFURNISHED = new Set([
   'B402','B403','B404','B405','B410','B411','B412','B413','B414',
-  ,'B502','B514', 'B503'
+  ,'B502', 'B503'
 ]); 
 
 /** Grid layouts (8 cols × 2 rows per floor “strip” for simplicity) */
