@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ยืนยันการฝากห้อง - Mama Mansion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fd;
+      --panel: rgba(255, 255, 255, 0.72);
+      --panel-border: rgba(255, 255, 255, 0.9);
+      --text: #101828;
+      --muted: #5f6b84;
+      --blue: #2476ff;
+      --blue-deep: #1458f5;
+      --blue-soft: #dce9ff;
+      --shadow: 0 28px 80px rgba(36, 118, 255, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 115%, rgba(36, 118, 255, 0.94) 0, rgba(36, 118, 255, 0.88) 13%, rgba(103, 169, 255, 0.58) 25%, rgba(173, 211, 255, 0.3) 36%, rgba(246, 248, 253, 0) 48%),
+        linear-gradient(180deg, #fcfdff 0%, var(--bg) 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(20px);
+      opacity: 0.55;
+      z-index: 0;
+    }
+
+    body::before {
+      width: 320px;
+      height: 320px;
+      top: -90px;
+      right: -120px;
+      background: rgba(36, 118, 255, 0.15);
+    }
+
+    body::after {
+      width: 280px;
+      height: 280px;
+      left: -100px;
+      bottom: 140px;
+      background: rgba(62, 142, 255, 0.14);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 8px 8px 0;
+    }
+
+    .brand {
+      font-size: clamp(1.35rem, 2vw, 1.7rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--blue);
+    }
+
+    .hero {
+      flex: 1;
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 34px 0 80px;
+      position: relative;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 10px 7px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.96);
+      box-shadow: 0 12px 30px rgba(85, 120, 200, 0.12);
+      margin-bottom: 20px;
+    }
+
+    .badge-chip {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #5db0ff 0%, var(--blue-deep) 100%);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.28);
+    }
+
+    .badge-text {
+      color: #55627a;
+      font-size: 0.98rem;
+      font-weight: 600;
+      padding-right: 10px;
+    }
+
+    .content {
+      max-width: 900px;
+      position: relative;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      font-weight: 800;
+    }
+
+    .headline-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .toggle-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px;
+      width: clamp(92px, 12vw, 120px);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+      box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.25),
+        0 12px 28px rgba(36, 118, 255, 0.34);
+    }
+
+    .toggle-pill::after {
+      content: "";
+      width: clamp(40px, 5vw, 52px);
+      height: clamp(40px, 5vw, 52px);
+      margin-left: auto;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow:
+        inset 0 2px 8px rgba(36, 118, 255, 0.15),
+        0 8px 18px rgba(19, 77, 173, 0.24);
+    }
+
+    .accent-text {
+      color: var(--blue);
+    }
+
+    .summary {
+      margin: 24px auto 0;
+      max-width: 640px;
+      font-size: clamp(1rem, 2vw, 1.28rem);
+      line-height: 1.65;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .code-card {
+      margin: 30px auto 0;
+      max-width: 560px;
+      padding: 22px 24px;
+      border-radius: 28px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .code-label {
+      display: block;
+      font-size: 0.95rem;
+      color: #60708d;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .code-value {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .code-help {
+      margin: 14px 0 0;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: #53627b;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .button-primary {
+      min-height: 62px;
+      padding: 0 32px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.06rem;
+      font-weight: 700;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue) 0%, #4c83ff 100%);
+      box-shadow: 0 18px 36px rgba(36, 118, 255, 0.34);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .redirect {
+      margin-top: 18px;
+      font-size: 0.97rem;
+      color: #64748b;
+    }
+
+    .floating-card {
+      position: absolute;
+      width: 118px;
+      height: 118px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.6rem;
+      background: linear-gradient(160deg, #0b7dff 0%, #3656ff 100%);
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,0.22),
+        0 18px 44px rgba(36, 118, 255, 0.26);
+    }
+
+    .floating-card small {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.75rem;
+      opacity: 0.84;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .card-left-top { top: 88px; left: 16px; transform: rotate(-10deg); }
+    .card-left-bottom { bottom: 170px; left: 30px; transform: rotate(8deg); }
+    .card-right-top { top: 92px; right: 18px; transform: rotate(9deg); }
+    .card-right-bottom { bottom: 168px; right: 32px; transform: rotate(-2deg); }
+
+    @media (max-width: 920px) {
+      .floating-card {
+        width: 88px;
+        height: 88px;
+        font-size: 1.2rem;
+        border-radius: 22px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 16px; }
+      .topbar { padding: 0; }
+      .hero { padding-top: 24px; padding-bottom: 68px; }
+      .badge { margin-bottom: 18px; }
+      .summary { font-size: 1rem; }
+      .code-card { border-radius: 24px; padding: 20px 18px; }
+      .actions { align-items: stretch; }
+      .button-primary { width: 100%; }
+      .floating-card {
+        width: 72px;
+        height: 72px;
+        font-size: 1rem;
+        border-radius: 18px;
+      }
+      .card-left-top { top: 96px; left: 0; }
+      .card-right-top { top: 94px; right: 0; }
+      .card-left-bottom { left: 6px; bottom: 142px; }
+      .card-right-bottom { right: 6px; bottom: 142px; }
+    }
+
+    @media (max-width: 520px) {
+      .floating-card {
+        display: none;
+      }
+      h1 { font-size: 2.65rem; }
+      .headline-accent { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">Mama Mansion</div>
+    </header>
+
+    <main class="hero">
+      <div class="floating-card card-left-top">PB<small>TRACK</small></div>
+      <div class="floating-card card-left-bottom">LINE<small>READY</small></div>
+      <div class="floating-card card-right-top">ROOM<small>ALERT</small></div>
+      <div class="floating-card card-right-bottom">FAST<small>SEARCH</small></div>
+
+      <section class="content">
+        <div class="badge">
+          <span class="badge-chip">New</span>
+          <span class="badge-text">Prebook tracking activated</span>
+        </div>
+
+        <h1>
+          ฝากห้องเสร็จแล้ว
+          <span class="headline-accent">
+            <span class="toggle-pill" aria-hidden="true"></span>
+            <span class="accent-text">กลับไป LINE</span>
+          </span>
+          เพื่อยืนยันรหัสของคุณ
+        </h1>
+
+        <p class="summary">
+          ระบบจะพากลับไปที่แชท LINE พร้อมรหัสฝากห้อง เพื่อให้ทีมงานค้นหาและติดตามห้องว่างให้คุณได้เร็วขึ้น
+        </p>
+
+        <div class="code-card">
+          <span class="code-label">Prebook Code</span>
+          <span class="code-value" id="prebook-code">#PB---</span>
+          <p class="code-help">
+            เมื่อรหัสนี้ถูกส่งกลับเข้า LINE แล้ว ทีมงานจะค้นหาคุณจากรหัสนี้ได้ทันที โดยไม่ต้องไล่หาประวัติแชทเอง
+          </p>
+        </div>
+
+        <div class="actions">
+          <a id="line-button" class="button-primary" href="https://line.me/R/oaMessage/@mama37/?" target="_blank" rel="noopener">
+            กลับไป LINE และส่งรหัส
+          </a>
+        </div>
+
+        <p class="redirect" id="redirect-note">
+          กำลังเปิด LINE อัตโนมัติ หากไม่เด้งภายใน 2 วินาที กดปุ่มด้านบนได้เลย
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+      const queryCode = (params.get('code') || '').trim();
+      const storedCode = (localStorage.getItem('prebookCode') || '').trim();
+      const code = queryCode || storedCode || '#PB---';
+
+      const codeEl = document.getElementById('prebook-code');
+      const lineButton = document.getElementById('line-button');
+      const redirectNote = document.getElementById('redirect-note');
+
+      codeEl.textContent = code;
+      localStorage.setItem('prebookCode', code);
+
+      const lineBase = 'https://line.me/R/oaMessage/@mama37/?';
+      const lineUrl = lineBase + encodeURIComponent(code);
+      lineButton.href = lineUrl;
+
+      if (code && code !== '#PB---') {
+        window.setTimeout(function () {
+          window.location.href = lineUrl;
+        }, 1800);
+      } else {
+        redirectNote.textContent = 'ไม่พบรหัสฝากห้อง กรุณากลับไปกรอกฟอร์มอีกครั้ง';
+      }
+    });
+  </script>
+</body>
+</html>

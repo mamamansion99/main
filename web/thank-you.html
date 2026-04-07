@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ยืนยันรายการ - Mama Mansion</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    .thank-you-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      background-color: #f8fafc;
+      text-align: center;
+    }
+    .thank-you-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #0d254c;
+    }
+    .thank-you-section p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #5f6c7b;
+    }
+    #reservation-code {
+      font-weight: 600;
+      color: #0d254c;
+    }
+    .line-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .line-actions img.qr-code {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    #redirect-note {
+      max-width: 34rem;
+    }
+    @media (min-width: 600px) {
+      .line-actions { flex-direction: row; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <section class="thank-you-section">
+    <h2 id="thank-you-heading">ขอบคุณสำหรับการจอง!</h2>
+    <p id="code-line">รหัสของคุณคือ: <span id="reservation-code">—</span></p>
+    <p id="detail-line">โปรดติดต่อเราทาง LINE เพื่อยืนยันรายการ</p>
+    <p id="redirect-note"></p>
+
+    <div class="line-actions">
+      <a
+        id="line-button"
+        href="https://line.me/R/oaMessage/@mama37/?"
+        class="btn"
+        target="_blank"
+        rel="noopener"
+      >กลับไป LINE</a>
+
+      <img src="images/QR_CODE.png" alt="QR code for LINE" class="qr-code">
+    </div>
+  </section>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const params = new URLSearchParams(window.location.search);
+    const mode = (params.get('mode') || '').trim().toLowerCase();
+    const queryCode = (params.get('code') || '').trim();
+    const storedReservationCode = (localStorage.getItem('reservationCode') || '').trim();
+    const storedPrebookCode = (localStorage.getItem('prebookCode') || '').trim();
+    const isPrebook = mode === 'prebook';
+    const code = queryCode || (isPrebook ? storedPrebookCode : storedReservationCode);
+
+    const heading = document.getElementById('thank-you-heading');
+    const codeLine = document.getElementById('code-line');
+    const codeSpan = document.getElementById('reservation-code');
+    const detailLine = document.getElementById('detail-line');
+    const redirectNote = document.getElementById('redirect-note');
+    const lineBtn = document.getElementById('line-button');
+
+    if (code) codeSpan.textContent = code;
+
+    const base = 'https://line.me/R/oaMessage/@mama37/?';
+    const message = code || '';
+    lineBtn.href = message ? base + encodeURIComponent(message) : base;
+
+    if (isPrebook) {
+      document.title = 'ยืนยันการฝากห้อง - Mama Mansion';
+      heading.textContent = 'ได้รับคำขอฝากห้องเรียบร้อยแล้ว';
+      codeLine.innerHTML = `รหัสฝากห้องของคุณคือ: <span id="reservation-code">${code || '—'}</span>`;
+      detailLine.textContent = 'ระบบจะพากลับไป LINE เพื่อส่งรหัสนี้กลับเข้าแชท ให้ทีมงานค้นหาและติดต่อคุณได้เร็วขึ้น';
+      redirectNote.textContent = code
+        ? 'หาก LINE ไม่เปิดอัตโนมัติ กรุณากดปุ่มด้านบนเพื่อส่งรหัสกลับเข้าแชท'
+        : '';
+      lineBtn.textContent = code ? `กลับไป LINE และส่ง ${code}` : 'กลับไป LINE';
+    } else {
+      heading.textContent = 'ขอบคุณสำหรับการจอง!';
+      codeLine.innerHTML = `รหัสการจองของคุณคือ: <span id="reservation-code">${code || '—'}</span>`;
+      detailLine.textContent = 'โปรดติดต่อเราทาง LINE เพื่อยืนยันการจองและชำระเงินค่าจอง';
+      redirectNote.textContent = '';
+      lineBtn.textContent = 'แชทกับเราใน LINE';
+    }
+
+    lineBtn.addEventListener('click', function () {
+      const latest = isPrebook
+        ? (localStorage.getItem('prebookCode') || '').trim() || queryCode
+        : (localStorage.getItem('reservationCode') || '').trim();
+      if (latest) {
+        this.href = base + encodeURIComponent(latest);
+      }
+    });
+
+    if (isPrebook && code) {
+      window.setTimeout(function () {
+        window.location.href = base + encodeURIComponent(code);
+      }, 1800);
+    }
+  });
+  </script>
+</body>
+</html>

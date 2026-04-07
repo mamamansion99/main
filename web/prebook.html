@@ -40,7 +40,6 @@
   <header class="navbar">
     <div class="container">
       <div class="logo">Mama Mansion</div>
-      <nav><a class="nav-btn" href="index.html#reservation">กลับไปจองปกติ</a></nav>
     </div>
   </header>
 
@@ -55,7 +54,7 @@
         <form id="prebook-form" class="reservation-form">
           <input type="text" name="fullname" placeholder="ชื่อ–นามสกุล" autocomplete="name" required />
           <input type="tel"  name="phone"    placeholder="เบอร์โทรศัพท์" autocomplete="tel" required />
-          <input type="text" name="line_id"  placeholder="ไลน์ไอดี" autocomplete="off" required />
+          <input type="text" name="line_id"  placeholder="ไลน์ไอดี (ถ้ามี)" autocomplete="off" />
           <textarea name="notes" rows="4" placeholder="หมายเหตุเพิ่มเติม (ไม่บังคับ)"></textarea>
 
           <!-- ต้องการที่จอดรถ (สไตล์เดียวกับหน้าเดิม) -->
@@ -126,7 +125,8 @@
 
           // ไปหน้า thank-you (โหมด prebook)
           const code = text.startsWith('#') ? text : ('#' + text);
-          window.location.href = `thank-you.html?mode=prebook&code=${encodeURIComponent(code)}`;
+          localStorage.setItem('prebookCode', code);
+          window.location.href = `prebook-thank-you.html?code=${encodeURIComponent(code)}`;
         } catch (err) {
           console.error(err);
           alert('ขออภัย ระบบขัดข้อง กรุณาลองใหม่อีกครั้ง');
